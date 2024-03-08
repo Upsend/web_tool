@@ -30,7 +30,8 @@ class Locators:
 
     FIN_FIELD = "div.result"
     CONTINUE_BUTTON = (By.CSS_SELECTOR, ".buttons .register-continue-button")
-    ERR_FIELD = ""
+    ERR_FIELD = (By.CSS_SELECTOR, ".field-validation-valid")
+
 
 
 

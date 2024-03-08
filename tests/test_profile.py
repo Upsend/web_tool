@@ -73,5 +73,11 @@ class TestProfile:
         web.enter_email(data[2])
         web.click(self.locators.SAVE_BUTTON)
 
+        errorFileds = web.driver.find_element(By.CSS_SELECTOR, self.locators.ERR_FIELD[1]).text
+
+        for field in errorFileds:
+            web.checking("", field)
+
+
 
 

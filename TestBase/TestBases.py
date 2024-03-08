@@ -21,7 +21,7 @@ class TestBase():
         self.element_visible(locator).click()
 
     def readfile(self, filename):
-        with open(filename) as file:
+        with open(filename, "r") as file:
             data = []
             for line in file:
                 data.append(line)
@@ -35,6 +35,10 @@ class TestBase():
     def element_visible(self, locator):
         return wait(self.driver, 10).until(
             EC.visibility_of_element_located(locator)
+        )
+    def all_elements_visible(self, locator):
+        return wait(self.driver, 10).until(
+            EC.visibility_of_all_elements_located(locator)
         )
 
 

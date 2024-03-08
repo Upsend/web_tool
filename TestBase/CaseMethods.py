@@ -1,3 +1,6 @@
+import os
+import sys
+sys.path.append(os.getcwd())
 from TestBase.TestBases import TestBase
 from locators.locators import Locators
 
