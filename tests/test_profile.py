@@ -73,10 +73,47 @@ class TestProfile:
         web.enter_email(data[2])
         web.click(self.locators.SAVE_BUTTON)
 
-        errorFileds = web.driver.find_element(By.CSS_SELECTOR, self.locators.ERR_FIELD[1]).text
+        errorFields = web.driver.find_elements(By.CSS_SELECTOR, self.locators.ERR_FIELD[1])
 
-        for field in errorFileds:
-            web.checking("", field)
+        for field in errorFields:
+            web.checking("", field.text)
+
+    def test_change_acc_data_wrong(self, set_driver):
+
+        self.test_change_acc_data(set_driver)
+        web = CaseMethods(set_driver, "https://demowebshop.tricentis.com/")
+
+        web.driver.find_element(By.ID, self.locators.FIRST_NAME[1]).clear()
+        web.driver.find_element(By.ID, self.locators.LAST_NAME[1]).clear()
+        web.driver.find_element(By.ID, self.locators.EMAIL[1]).clear()
+
+        web.writeFile("../data/AccountData.txt", "\n"
+                                                 "\n"
+                                                 "person09056@gmail")
+        data = web.readfile("../data/AccountData.txt")
+
+        web.enter_firstname(data[0])
+        web.enter_lastname(data[1])
+        web.enter_email(data[2])
+        web.click(self.locators.SAVE_BUTTON)
+
+        errorFields = web.driver.find_elements(By.CSS_SELECTOR, self.locators.ERR_FIELD[1])
+
+        web.checking("First name is required.", errorFields[0].text)
+        web.checking("Last name is required.", errorFields[1].text)
+        web.checking("Wrong email", errorFields[2].text)
+
+        #Возвращаем данные в исходное состояние
+        web.writeFile("../data/AccountData.txt", "Danil\n"
+                                                 "Azizov\n"
+                                                 "person09056@gmail.com")
+
+
+
+
+
+
+
 
 
 
