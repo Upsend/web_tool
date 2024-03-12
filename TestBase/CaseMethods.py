@@ -1,15 +1,13 @@
 import os
 import sys
-
 from selenium.webdriver.common.by import By
-
 sys.path.append(os.getcwd())
 from TestBase.TestBases import TestBase
-from locators.locators import Locators
+from locators.address_locators import AddressLocators
 
 
 class CaseMethods(TestBase):
-
+    addr_locators = AddressLocators
 
     def enter_firstname(self, locator, firstname):
         self.element_visible(locator).send_keys(firstname)
@@ -31,11 +29,22 @@ class CaseMethods(TestBase):
 
     def enter_country(self, countryId):
         country = f"[@value='{str(countryId)}']"
-        by = self.locators.COUNTRY[0]
-        xpath = self.locators.COUNTRY[1]+country
+        by = self.addr_locators.COUNTRY[0]
+        xpath = self.addr_locators.COUNTRY[1]+country
         locator = (by, xpath)
         self.element_visible(locator).click()
 
     def enter_city(self, city):
-        self.element_visible(self.locators.CITY).send_keys(city)
+        self.element_visible(self.addr_locators.CITY).send_keys(city)
+
+    def enter_address(self, address):
+        self.element_visible(self.addr_locators.ADDRESS1).send_keys(address)
+
+    def enter_zip(self, zip):
+        self.element_visible(self.addr_locators.POSTAL_CODE).send_keys(zip)
+
+    def enter_phoneNumber(self, number):
+        self.element_visible(self.addr_locators.PHONE_NUNBER).send_keys(number)
+
+
 

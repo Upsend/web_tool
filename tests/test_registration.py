@@ -4,7 +4,7 @@ sys.path.append(os.getcwd())
 from faker import Faker
 from selenium.webdriver.common.by import By
 from TestBase.CaseMethods import CaseMethods
-from locators.locators import Locators
+from locators.default_locators import Locators
 
 
 class TestRegister:

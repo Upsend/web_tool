@@ -5,13 +5,15 @@ import time
 from faker import Faker
 from selenium.webdriver.common.by import By
 from TestBase.CaseMethods import CaseMethods
-from locators.locators import Locators
+from locators.default_locators import Locators
+from locators.address_locators import AddressLocators
 
 
 
 class TestProfile:
 
     locators = Locators
+    addr_locators = AddressLocators
     fake = Faker("ru_RU")
 
     def test_login_success(self, set_driver):
@@ -110,6 +112,41 @@ class TestProfile:
 
 
 
+    def test_add_address(self, set_driver):
+
+        self.test_login_success(set_driver)
+        web = CaseMethods(set_driver, "https://demowebshop.tricentis.com/")
+        data = web.readfile("../data/AccountData.txt")
+
+        firstname = data[0]
+        lastname = data[1]
+        email = data[2]
+        country = self.fake.country()
+        city = self.fake.city()
+        address = self.fake.address()
+        zipcode = self.fake.postcode()
+        phone = self.fake.phone_number()
+
+        acc_name = (By.CSS_SELECTOR, self.locators.ACC_NAME)
+        web.click(acc_name)
+        web.click(self.locators.ADDRESSES)
+        web.click(self.addr_locators.NEW_ADDR_BTN)
+
+        firstname_default_value = web.driver.find_element(By.ID, self.locators.FIRST_NAME[1]).get_attribute('value')
+        web.checking(firstname, firstname_default_value)
+
+        lastname_default_value = web.driver.find_element(By.ID, self.locators.LAST_NAME[1]).get_attribute('value')
+        web.checking(lastname, lastname_default_value)
+
+        email_default_value = web.driver.find_element(By.ID, self.locators.EMAIL[1]).get_attribute('value')
+        web.checking(email, email_default_value)
+
+        web.enter_country("88")
+        web.enter_city(city)
+        web.enter_address(address)
+        web.enter_zip(zipcode)
+        web.enter_phoneNumber(phone)
+        web.click(self.addr_locators.SAVE_ADDRESS_BUTTON)
 
 
 

@@ -45,15 +45,4 @@ class Locators:
     ADDRESSES = (By.XPATH, "//ul[@class='list']/li/a[text()='Addresses']")
     ORDERS = (By.XPATH, "//a[text()='Orders']")
 
-    """Локаторы на форме создания адреса"""
-
-    NEW_ADDR_BTN = (By.CSS_SELECTOR, ".add-address-button")
-    COUNTRY = (By.XPATH, "//select[@id='Address_CountryId']/option")
-    CITY = (By.CSS_SELECTOR, "#Address_City")
-
-
-
-
-
-
 
