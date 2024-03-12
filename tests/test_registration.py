@@ -21,11 +21,11 @@ class TestRegister:
         web = CaseMethods(set_driver, "https://demowebshop.tricentis.com/")
         web.open()
         web.click(self.locators.REG_BTN)
-        web.enter_firstname(self.fake.first_name())
-        web.enter_lastname(self.fake.last_name())
-        web.enter_email(email)
-        web.enter_password(email)
-        web.enter_repassword(email)
+        web.enter_firstname(self.locators.FIRST_NAME, self.fake.first_name())
+        web.enter_lastname(self.locators.LAST_NAME, self.fake.last_name())
+        web.enter_email(self.locators.EMAIL, email)
+        web.enter_password(self.locators.PASSWORD, "123123")
+        web.enter_repassword(self.locators.REPASSWORD, "123123")
         web.click(self.locators.REGISTER_BUTTON)
 
         text = web.driver.find_element(By.CSS_SELECTOR, self.locators.FIN_FIELD).text

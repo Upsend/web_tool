@@ -3,13 +3,19 @@ from selenium.webdriver.common.by import By
 
 class Locators:
 
-    """Локаторы формы регистрации и логина"""
+    """Локаторы форм на странице"""
 
     FIRST_NAME = (By.ID, "FirstName")
     LAST_NAME = (By.ID, "LastName")
     EMAIL = (By.ID, "Email")
+
     PASSWORD = (By.ID, "Password")
     REPASSWORD = (By.ID, "ConfirmPassword")
+    COUNTRY = ()
+    CITY = ()
+    ADDRESS = ()
+    ZIP_CODE = ()
+    PHONE_NUMBER = ()
 
     """Локаторы меню"""
 
@@ -31,6 +37,20 @@ class Locators:
     FIN_FIELD = "div.result"
     CONTINUE_BUTTON = (By.CSS_SELECTOR, ".buttons .register-continue-button")
     ERR_FIELD = (By.CSS_SELECTOR, ".field-validation-error")
+
+
+    """Локаторы сайдбара MY ACCOUNT"""
+
+    CUSTOMER_INFO = (By.XPATH, "//a[text()='Customer info']")
+    ADDRESSES = (By.XPATH, "//ul[@class='list']/li/a[text()='Addresses']")
+    ORDERS = (By.XPATH, "//a[text()='Orders']")
+
+    """Локаторы на форме создания адреса"""
+
+    NEW_ADDR_BTN = (By.CSS_SELECTOR, ".add-address-button")
+    COUNTRY = (By.XPATH, "//select[@id='Address_CountryId']/option")
+    CITY = (By.CSS_SELECTOR, "#Address_City")
+
 
 
 

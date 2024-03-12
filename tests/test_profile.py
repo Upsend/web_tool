@@ -19,8 +19,8 @@ class TestProfile:
         web = CaseMethods(set_driver, "https://demowebshop.tricentis.com/")
         web.open()
         web.click(self.locators.LOGIN_BTN)
-        web.enter_email('person09056@gmail.com')
-        web.enter_password('123123')
+        web.enter_email(self.locators.EMAIL, 'person09056@gmail.com')
+        web.enter_password(self.locators.PASSWORD, '123123')
         web.click(self.locators.LOG_IN_BUTTON)
 
         acc_name = web.driver.find_element(By.CSS_SELECTOR, self.locators.ACC_NAME).text
@@ -68,9 +68,9 @@ class TestProfile:
                                                  "person09056@gmail.com")
         data = web.readfile("../data/AccountData.txt")
 
-        web.enter_firstname(data[0])
-        web.enter_lastname(data[1])
-        web.enter_email(data[2])
+        web.enter_firstname(self.locators.FIRST_NAME, data[0])
+        web.enter_lastname(self.locators.LAST_NAME, data[1])
+        web.enter_email(self.locators.EMAIL, data[2])
         web.click(self.locators.SAVE_BUTTON)
 
         errorFields = web.driver.find_elements(By.CSS_SELECTOR, self.locators.ERR_FIELD[1])
@@ -92,9 +92,9 @@ class TestProfile:
                                                  "person09056@gmail")
         data = web.readfile("../data/AccountData.txt")
 
-        web.enter_firstname(data[0])
-        web.enter_lastname(data[1])
-        web.enter_email(data[2])
+        web.enter_firstname(self.locators.FIRST_NAME, data[0])
+        web.enter_lastname(self.locators.LAST_NAME, data[1])
+        web.enter_email(self.locators.EMAIL, data[2])
         web.click(self.locators.SAVE_BUTTON)
 
         errorFields = web.driver.find_elements(By.CSS_SELECTOR, self.locators.ERR_FIELD[1])
@@ -107,6 +107,9 @@ class TestProfile:
         web.writeFile("../data/AccountData.txt", "Danil\n"
                                                  "Azizov\n"
                                                  "person09056@gmail.com")
+
+
+
 
 
 
