@@ -132,14 +132,21 @@ class TestProfile:
         web.click(self.locators.ADDRESSES)
         web.click(self.addr_locators.NEW_ADDR_BTN)
 
-        firstname_default_value = web.driver.find_element(By.ID, self.locators.FIRST_NAME[1]).get_attribute('value')
-        web.checking(firstname, firstname_default_value)
+        # проверяем, что поля firstname, lastname, email заполнены по умолчанию
 
-        lastname_default_value = web.driver.find_element(By.ID, self.locators.LAST_NAME[1]).get_attribute('value')
-        web.checking(lastname, lastname_default_value)
+        # firstname_default_value = web.driver.find_element(By.ID, self.locators.FIRST_NAME[1]).get_attribute('value')
+        # web.checking(firstname, firstname_default_value)
+        #
+        # lastname_default_value = web.driver.find_element(By.ID, self.locators.LAST_NAME[1]).get_attribute('value')
+        # web.checking(lastname, lastname_default_value)
+        #
+        # email_default_value = web.driver.find_element(By.ID, self.locators.EMAIL[1]).get_attribute('value')
+        # web.checking(email, email_default_value)
 
-        email_default_value = web.driver.find_element(By.ID, self.locators.EMAIL[1]).get_attribute('value')
-        web.checking(email, email_default_value)
+        web.enter_firstname(self.addr_locators.FIRST_NAME, "Danil")
+        web.enter_lastname(self.addr_locators.LAST_NAME, "Azizov")
+        web.enter_email(self.addr_locators.EMAIL, "person09056@gmail.com")
+
 
         web.enter_country("88")
         web.enter_city(city)
@@ -148,13 +155,14 @@ class TestProfile:
         web.enter_phoneNumber(phone)
         web.click(self.addr_locators.SAVE_ADDRESS_BUTTON)
 
+        #Проверяем, что введенные данные записались верно
 
+        title = web.driver.find_element(By.XPATH, self.addr_locators.RES_TITLE[1]).text
+        name = web.driver.find_element(By.CSS_SELECTOR, self.addr_locators.RES_NAME[1]).text
+        mail = web.driver.find_element(By.CSS_SELECTOR, self.addr_locators.RES_EMAIL[1]).text
+        phone_num = web.driver.find_element(By.CSS_SELECTOR, self.addr_locators.RES_PHONE[1]).text
 
-
-
-
-
-
-
-
-
+        web.checking(title, f"{firstname} {lastname}")
+        web.checking(name, f"{firstname} {lastname}")
+        web.checking(mail, f"Email: {email}")
+        web.checking(phone_num, f"Phone number: {phone}")
